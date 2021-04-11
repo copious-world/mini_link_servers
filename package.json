@@ -1,0 +1,16 @@
+{
+  "name": "mls-apps",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "bash runservers.sh"
+  },
+  "devDependencies": {
+  },
+  "dependencies": {
+    "copious-little-searcher": "https://github.com/copious-world/copious-little-searcher.git",
+    "fastify": "^3.14.2",
+    "fastify-cors": "^5.1.0",
+    "forever-monitor": "^3.0.3",
+    "middie": "^5.2.0"
+  }
+}
