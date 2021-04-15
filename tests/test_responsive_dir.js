@@ -2,8 +2,39 @@
 let {uuid,sleeper,qnd_assert,dump_test_results} = require('./helpers.js')
 let DirWatcherHandler = require('../lib/app_dir_watcher.js')
 
+const { watch } = require('fs/promises');
+
 const fs = require('fs')
 
+/*
+const ac = new AbortController();
+const { signal } = ac;
+setTimeout(() => ac.abort(), 10000);
+*/
+
+
+async function test_more_local() {
+
+    let watcher = watch('../blog/data/blog/')
+
+    for await (const event of watcher) {
+console.dir(event)
+        let {eventType,filename} = event
+        let fname = filename.trim()
+console.log(fname)
+    }
+
+    /*
+    fs.watch('../blog/data/blog/', (eventType, filename) => {
+        console.log(`event type is: ${eventType}`);
+        if (filename) {
+            console.log(`filename provided: ${filename}`);
+        } else {
+            console.log('filename not provided');
+        }
+    });
+    */
+}
 
 class FauxUserSearch {
     constructor() {}
@@ -32,6 +63,11 @@ class TestManager {
     constructor() {
 
     }
+
+    add_just_one(f_obj,is_new) {
+        console.log(`TestManager ${__function}`)
+        console.dir(f_obj)
+    }
     //
     remove_just_one(elem_id) {
         console.log("remove_just_one: " + elem_id)
@@ -40,14 +76,14 @@ class TestManager {
 }
 
 let sim_files = [
-    [ "write", "./dyno_faux/test_file1.json", JSON.stringify({
+    [ "write", "../blog/data/blog/test_file1.json", JSON.stringify({
         "test" : 1, "value" : "something to say"
     }) ],
-    [ "write", "./dyno_faux/test_file2.json", JSON.stringify({
+    [ "write", "../blog/data/blog/test_file2.json", JSON.stringify({
         "test" : 2, "value" : "butter finger winger dinger"
     }) ],
-    [ "remove", "./dyno_faux/test_file1.json" ],
-    [ "write", "./dyno_faux/test_file3.json", JSON.stringify([
+    [ "remove", "../blog/data/blog/test_file1.json" ],
+    [ "write", "../blog/data/blog/test_file3.json", JSON.stringify([
         {"test" : 3, "value" : "sploppy doppy longer gone" },
         {"test" : 4, "value" : "cat bread dog food tomato"},
         {"test" : 5, "value" : "please keep this out of reach"},
@@ -55,9 +91,9 @@ let sim_files = [
         {"test" : 7, "value" : "wild things"},
         {"test" : 8, "value" : "how but the gill of the fish with a wish"}
     ]) ],
-    [ "remove", "./dyno_faux/test_file2.json" ],
+    [ "remove", "../blog/data/blog/test_file2.json" ],
     [ "sleep", 2 ],
-    [ "remove", "./dyno_faux/test_file3.json" ]
+    [ "remove", "../blog/data/blog/test_file3.json" ]
 ]
 
 
@@ -82,7 +118,7 @@ function file_changes() {
 async function test_DirWatcherHandler() {
     let element_manager = new TestManager()
     let application = new FauxApplication()
-    let dwh = new DirWatcherHandler("./dyno_faux",element_manager,application)
+    let dwh = new DirWatcherHandler("../blog/data/blog",{},element_manager,application)
     dwh.start()
     let resolver = () => {}
     let p = new Promise((resolve,reject) => {
@@ -99,6 +135,7 @@ async function test_DirWatcherHandler() {
 
 async function all_tests_this_module() {
     await test_DirWatcherHandler()
+    //test_more_local()
 }
 
 
