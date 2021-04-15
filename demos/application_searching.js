@@ -2,7 +2,7 @@
 
 
 
-const {Searching} = require('./searching.js')
+const { Searching } = require('copious-little-searcher')
 
 const SCORE_THRESHOLD = 0.5
 

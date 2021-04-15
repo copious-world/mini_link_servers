@@ -1,10 +1,7 @@
 
 
 
-
-const {Searching} = require('./searching.js')
-
-
+const { Searching } = require('copious-little-searcher')
 
 
 // utility : count_occurances
