@@ -23,6 +23,13 @@ function count_occurances(check_txt,term) {
 }
 
 
+function unload_text(txt) {
+    if ( txt === undefined ) return(false)
+    txt = txt.trim()
+    if ( txt.length === 0 ) return(false)
+    return(txr)
+}
+
 
 class AppSearching extends Searching {
 
@@ -47,6 +54,11 @@ class AppSearching extends Searching {
         return(score*mult)
     }
 
+    // title
+    // subject
+    // abstract
+    // keys
+
     // a match score particular to this data type....
     good_match(f_obj,match_text) {
     
@@ -54,15 +66,22 @@ class AppSearching extends Searching {
     
         let score = 0.0
     
-        let check_txt = f_obj.title
-        score += this.score_match(check_txt,q_list,3)
-        check_txt = f_obj.subject
-        score += this.score_match(check_txt,q_list,4)
-        check_txt = f_obj.keys.join(' ')
-        score += this.score_match(check_txt,q_list,3)
-        check_txt = f_obj.txt_full
-        score += this.score_match(check_txt,q_list,1)
-    
+        let check_txt = unload_text(f_obj.title)
+        if ( check_txt !== false ) { score += this.score_match(check_txt,q_list,3) }
+        //
+        check_txt = unload_text(f_obj.subject)
+        if ( check_txt !== false ) { score += this.score_match(check_txt,q_list,3) }
+        
+        let keys = f_obj.keys
+        if ( keys && keys.length && Array.isArray(keys) ) {
+            check_txt = f_obj.keys.join(' ')
+            score += this.score_match(check_txt,q_list,3)
+        }
+
+        check_txt = unload_text(f_obj.abstract)
+        if ( check_txt !== false ) { score += this.score_match(check_txt,q_list,2.3) }
+
+        //
         let final_score = score/this.shrinkage
     
         f_obj.score = final_score
