@@ -114,7 +114,7 @@ function prune_searches() {
 //
 const start = async () => {
     try {
-        console.log(`listening on port: ${g_port}`)
+        console.log(`stream searcher :: listening on port: ${g_port}`)
       await app.listen(g_port)
     } catch (err) {
         app.log.error(err)
