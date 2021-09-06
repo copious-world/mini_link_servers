@@ -100,6 +100,15 @@ app.get('/reload',(req, res) => {
     res.send("OK")
 })
 
+app.get('/peristence/add-publisher/:plink', (req, res) => {
+    let persistence_link = req.params.plink
+    persistence_link = decodeURIComponent(persistence_link)
+    // check that this publisher is OK.  This will give us a link making
+    // this service be a client for subcription to publication...
+    g_registry_app.add_persistence_service(persistence_link)
+    res.send({ "status" : "OK" })
+})
+
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
