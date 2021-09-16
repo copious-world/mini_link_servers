@@ -4,8 +4,8 @@
   "scripts": {
     "start": "bash runservers.sh"
   },
-  "devDependencies": {},
   "dependencies": {
+    "categorical-handlers": "^0.2.8",
     "copious-little-searcher": "https://github.com/copious-world/copious-little-searcher.git",
     "fastify": "^3.14.2",
     "fastify-cors": "^5.1.0",
