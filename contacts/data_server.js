@@ -64,7 +64,7 @@ g_search_app.start_watching_files()
 // ---- ---- ---- ---- HTML APPLICATION PATHWAYS  ---- ---- ---- ---- ---- ---- ----
 
 app.get('/',(req, res) => {
-    const stream = fs.createReadStream('./test/index.html')
+    const stream = fs.createReadStream(g_conf.index_file)
     res.type('text/html').send(stream)
     //res.send("THIS SERVER IS WORKING")
 })
@@ -100,6 +100,15 @@ app.get('/reload',(req, res) => {
     res.send("OK")
 })
 
+app.get('/persistence/add-publisher/:plink', (req, res) => {
+    let persistence_link = req.params.plink
+    persistence_link = decodeURIComponent(persistence_link)
+    // check that this publisher is OK.  This will give us a link making
+    // this service be a client for subcription to publication...
+    g_search_app.add_persistence_service(persistence_link)
+    res.send({ "status" : "OK" })
+})
+
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
@@ -114,7 +123,7 @@ function prune_searches() {
 //
 const start = async () => {
     try {
-        console.log(`listening on port: ${g_port}`)
+        console.log(`contact searcher :: listening on port: ${g_port}`)
       await app.listen(g_port)
     } catch (err) {
         app.log.error(err)

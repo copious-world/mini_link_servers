@@ -70,7 +70,6 @@ app.get('/',(req, res) => {
 })
 
 app.get('/:uid/:query/:bcount/:offset', async (req, res) => {
-    console.dir(req.params)
     let data = await g_search_app.rated_search_processing(req,res)
     res.send(data)
 })

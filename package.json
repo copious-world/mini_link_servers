@@ -1,5 +1,5 @@
 {
-  "name": "mls-apps",
+  "name": "mini-link-servers",
   "version": "1.0.0",
   "scripts": {
     "start": "bash runservers.sh"
