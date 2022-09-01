@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // data server under ....<app name>
 // viewing data server
 //
