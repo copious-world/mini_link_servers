@@ -1,6 +1,6 @@
 {
   "name": "mini-link-servers",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "bin" : {
     "blog-mls-server" : "./blog/data_server.js",
     "streams-mls-server" : "./streams/data_server.js",
