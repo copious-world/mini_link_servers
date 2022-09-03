@@ -1,6 +1,6 @@
 {
   "name": "mini-link-servers",
-  "version": "0.9.3",
+  "version": "0.9.5",
   "bin" : {
     "blog-mls-server" : "./blog/data_server.js",
     "streams-mls-server" : "./streams/data_server.js",
@@ -13,11 +13,11 @@
   },
   "dependencies": {
     "categorical-handlers": "^0.3.7",
-    "copious-little-searcher": "0.2.3",
+    "copious-little-searcher": "0.2.4",
     "copious-registry": "^0.1.4",
-    "fastify": "^3.14.2",
-    "fastify-cors": "^5.1.0",
+    "fastify": "^4.5.3",
+    "fastify-cors": "^6.1.0",
     "forever-monitor": "^3.0.3",
-    "middie": "^5.2.0"
+    "middie": "^7.1.0"
   }
 }

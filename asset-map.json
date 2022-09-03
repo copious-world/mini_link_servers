@@ -1,0 +1,7 @@
+{
+    "blog-mls-server" : "blog/config_blog_server.conf",
+    "streams-mls-server" : "streams/config_streams_server.conf",
+    "contacts-mls-server" : "contacts/config_contacts_server.conf",
+    "demos-mls-server" : "demos/config_demos_server.conf",
+    "link-packages-mls-server" : "link-packages/config_link-packages_server.conf"
+}
