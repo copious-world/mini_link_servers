@@ -1,8 +1,12 @@
+#!/usr/bin/env node
+
 // data server under ....<app name>
 // viewing data server
 //
 const fs = require('fs')
-const fastify = require('fastify')
+const polka       = require('polka');
+const send = require('@polka/send-type');
+const app         = polka();
 //
 const AppSearching = require('./application_searching.js')  // the definer of this data type
 //
@@ -12,7 +16,6 @@ const RecordSearchApp = require('../lib/the_record_searcher_app.js')
 //
 let g_prune_timeout = null
 //
-const app = fastify()
 //
 // ---- ---- ---- ---- ---- ---- ---- ---- ----
 //
@@ -64,40 +67,52 @@ g_search_app.start_watching_files()
 // ---- ---- ---- ---- HTML APPLICATION PATHWAYS  ---- ---- ---- ---- ---- ---- ----
 
 app.get('/',(req, res) => {
-    const stream = fs.createReadStream('./test/index.html')
-    res.type('text/html').send(stream)
-    //res.send("THIS SERVER IS WORKING")
+    try {
+        const data = fs.readFileSync(g_conf.index_file)
+        send(res,200,data)    
+    } catch (e) {
+        send(res,404,"what")    
+    }
 })
 
 app.get('/:uid/:query/:bcount/:offset', async (req, res) => {
     let data = await g_search_app.rated_search_processing(req,res)
-    res.send(data)
+    send(res,200,data)
 })
 
 app.post('/:uid/:query/:bcount/:offset', async (req, res) => {
     let data = await g_search_app.rated_search_processing(req,res)
-    res.send(data)
+    send(res,200,data)
 })
 
 app.get('/custom/:owner/:query/:bcount/:offset', async (req, res) => {
     let data = await g_search_app.rated_custom_search_processing(req,res)
-    res.send(data)
+    send(res,200,data)
 })
 
 app.post('/custom/:op/:owner', async (req, res) => {
     let data = await g_search_app.rated_custom_search_ops(req,res)
-    res.send(data)
+    send(res,200,data)
 })
 
 app.get('/cycle/:halt', (req, res) => {
     let do_halt = req.params.halt
     g_search_interface.backup_searches(do_halt)
-    res.send("OK")
+    send(res,200,"OK")
 })
 
 app.get('/reload',(req, res) => {
     g_items_loader.load_directory()
-    res.send("OK")
+    send(res,200,"OK")
+})
+
+app.get('/persistence/add-publisher/:plink', (req, res) => {
+    let persistence_link = req.params.plink
+    persistence_link = decodeURIComponent(persistence_link)
+    // check that this publisher is OK.  This will give us a link making
+    // this service be a client for subcription to publication...
+    g_search_app.add_persistence_service(persistence_link)
+    send(res,200,{ "status" : "OK" })
 })
 
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
@@ -114,8 +129,9 @@ function prune_searches() {
 //
 const start = async () => {
     try {
-        console.log(`listening on port: ${g_port}`)
-      await app.listen(g_port)
+        app.listen(g_port, () => {
+            console.log(`[contact searcher] Application Listening on Port ${g_port}`);
+          })
     } catch (err) {
         app.log.error(err)
         process.exit(1)
@@ -137,13 +153,11 @@ start()
 // Do graceful shutdown
 function shutdown() {
     console.log('graceful shutdown express');
-    app.close(()  => {
-        if ( g_search_interface ) {
-            g_search_interface.backup_searches(true)
-        } else {
-            preprocess.exit(0)
-        }
-    });
+    if ( g_search_interface ) {
+        g_search_interface.backup_searches(true)
+    } else {
+        preprocess.exit(0)
+    }
 }
 
 // Handle ^C

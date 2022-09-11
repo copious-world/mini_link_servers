@@ -23,8 +23,6 @@ function count_occurances(check_txt,term) {
 
 
 class AppSearching extends Searching {
-
-    // 
     constructor(conf) {
         super(conf)
     }
