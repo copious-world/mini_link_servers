@@ -5,7 +5,7 @@
 //
 const fs = require('fs')
 const polka       = require('polka');
-const send = require('@polka/send-type');
+const send        = require('@polka/send-type');
 const app         = polka();
 
 const cors = require('cors')
@@ -115,7 +115,7 @@ app.get('/persistence/add-publisher/:plink', (req, res) => {
     persistence_link = decodeURIComponent(persistence_link)
     // check that this publisher is OK.  This will give us a link making
     // this service be a client for subcription to publication...
-    g_search_app.add_persistence_service(persistence_link,'admin-contacts')
+    g_search_app.add_persistence_service(persistence_link,'admin-calendars')
     send(res,200,{ "status" : "OK" })
 })
 
