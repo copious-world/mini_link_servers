@@ -1,7 +1,48 @@
 
-
-
 const { Searching } = require('copious-little-searcher')
+
+const {first_day_of_month_ts} = require('month-utils')
+
+
+class CalendarSearching extends Searching {
+
+
+    constructor(conf) {
+        super(conf)
+        this.sorted_keys
+    }
+
+    // will return a list of months containing scheduled slots
+    // query will be a simplified query -- just a start date
+    get_search(query,offset,box_count) {
+        let start_time = parseInt(query)
+        let start_date = first_day_of_month_ts(start_time)
+        let first_month = this.global_tracking_map[start_date]
+        if ( first_month ) {
+            this.keys_sorter()
+            let index = this.sorted_keys.indexOf(start_date)
+            if ( index > 0 ) {
+                if ( (index + offset) < this.sorted_keys.length ) {
+                    let results = []
+                    let start = (index + offset)
+                    let end = Math.min(this.sorted_keys.length - 1,start + box_count)
+                    for ( let i = start; i < end; i++ ) {
+                        let obj = this.global_tracking_map[this.sorted_keys[i]]
+                        results.push(obj)
+                    }
+                }
+            }
+        }
+        return []
+    }
+
+    async backup_searches(do_halt) {}
+
+    prune(delta_timeout) {}
+
+    async restore_searches() {}
+
+}
 
 
 // utility : count_occurances
@@ -22,7 +63,7 @@ function count_occurances(check_txt,term) {
 
 
 
-class AppSearching extends Searching {
+class AppSearching extends CalendarSearching {
 
     // 
     constructor(conf) {

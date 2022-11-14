@@ -14,9 +14,11 @@ app.use(cors())
 //
 const AppSearching = require('./application_searching.js')  // the definer of this data type
 //
-const {ObjFileDirLoader, SearchesByUser} = require('copious-little-searcher')
+const {ObjFileDirLoader} = require('copious-registry')
 const EntryWatcher = require('../lib/app_dir_watcher.js')
 const RecordSearchApp = require('../lib/the_record_searcher_app.js')
+
+const CalendarSearches = AppSearching  // 
 //
 let g_prune_timeout = null
 //
@@ -52,7 +54,7 @@ if ( g_conf_file !== undefined ) {
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 //
-let g_search_app = new RecordSearchApp(g_conf,SearchesByUser,AppSearching,EntryWatcher,ObjFileDirLoader)
+let g_search_app = new RecordSearchApp(g_conf,CalendarSearches,AppSearching,EntryWatcher,ObjFileDirLoader)
 //
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
@@ -101,7 +103,7 @@ app.post('/custom/:op/:owner', async (req, res) => {
 
 app.get('/cycle/:halt', (req, res) => {
     let do_halt = req.params.halt
-    g_search_interface.backup_searches(do_halt)
+    //g_search_interface.backup_searches(do_halt)
     send(res,200,"OK")
 })
 
@@ -134,7 +136,7 @@ function prune_searches() {
 const start = async () => {
     try {
         app.listen(g_port, () => {
-            console.log(`[contact searcher] Application Listening on Port ${g_port}`);
+            console.log(`[calendar searcher] Application Listening on Port ${g_port}`);
           })
     } catch (err) {
         app.log.error(err)
@@ -147,8 +149,8 @@ const start = async () => {
 // // // 
 //
 g_items_loader.load_directory()
-g_search_interface.restore_searches()
-g_prune_timeout = setInterval(prune_searches,TIMEOUT_THRESHHOLD_INTERVAL)
+//g_search_interface.restore_searches()     // calendar is not storing or caching searches (calendars are simple)
+//g_prune_timeout = setInterval(prune_searches,TIMEOUT_THRESHHOLD_INTERVAL)
 //
 //
 start()
@@ -157,11 +159,7 @@ start()
 // Do graceful shutdown
 function shutdown() {
     console.log('graceful shutdown express');
-    if ( g_search_interface ) {
-        g_search_interface.backup_searches(true)
-    } else {
-        preprocess.exit(0)
-    }
+    process.exit(0)
 }
 
 // Handle ^C
