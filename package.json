@@ -1,26 +1,31 @@
 {
   "name": "mini-link-servers",
-  "version": "0.9.9",
+  "version": "1.0.0",
   "bin": {
     "blog-mls-server": "./blog/data_server.js",
     "streams-mls-server": "./streams/data_server.js",
     "contacts-mls-server": "./contacts/data_server.js",
     "demos-mls-server": "./demos/data_server.js",
     "link-packages-mls-server": "./link-packages/data_server.js",
-    "calendar-mls-server": "./calendar/data_server.js"
+    "calendar-mls-server": "./calendar/data_server.js",
+    "users-mls-server": "./users/data_server.js",
+    "comments-mls-server": "./comments/data_server.js",
+    "ownership-mls-server": "./ownership/data_server.js",
+    "chats-mls-server": "./chats/data_server.js"
   },
   "scripts": {
     "start": "bash runservers.sh"
   },
   "devDependencies": {
-    "copious-registry": "^0.1.4"
+    "copious-registry": "^ 0.5.6"
   },
   "dependencies": {
     "@polka/send-type": "^0.5.2",
-    "categorical-handlers": "^0.3.8",
-    "copious-little-searcher": "0.2.4",
+    "categorical-handlers": "^0.4.10 ",
+    "copious-registry": "^0.5.7",
+    "copious-little-searcher": "^0.5.8",
     "middie": "^7.1.0",
-    "month-utils": "^0.8.1",
+    "month-utils": "^0.8.2",
     "polka": "^0.5.2"
   }
 }
