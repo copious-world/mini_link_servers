@@ -4,12 +4,12 @@
   "bin": {
     "blog-mls-server": "./blog/data_server.js",
     "streams-mls-server": "./streams/data_server.js",
-    "contacts-mls-server": "./contacts/data_server.js",
     "demos-mls-server": "./demos/data_server.js",
-    "link-packages-mls-server": "./link-packages/data_server.js",
-    "calendar-mls-server": "./calendar/data_server.js",
     "users-mls-server": "./users/data_server.js",
     "comments-mls-server": "./comments/data_server.js",
+    "contacts-mls-server": "./contacts/data_server.js",
+    "calendar-mls-server": "./calendar/data_server.js",
+    "link-packages-mls-server": "./link-packages/data_server.js",
     "ownership-mls-server": "./ownership/data_server.js",
     "chats-mls-server": "./chats/data_server.js"
   },
