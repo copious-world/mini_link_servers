@@ -2,19 +2,16 @@
   "name": "mini-link-servers",
   "version": "1.0.0",
   "bin": {
-    "blog-mls-server": "./blog/data_server.js",
-    "streams-mls-server": "./streams/data_server.js",
-    "demos-mls-server": "./demos/data_server.js",
-    "users-mls-server": "./users/data_server.js",
-    "comments-mls-server": "./comments/data_server.js",
-    "contacts-mls-server": "./contacts/data_server.js",
-    "calendar-mls-server": "./calendar/data_server.js",
-    "link-packages-mls-server": "./link-packages/data_server.js",
-    "ownership-mls-server": "./ownership/data_server.js",
-    "chats-mls-server": "./chats/data_server.js"
-  },
-  "scripts": {
-    "start": "bash runservers.sh"
+    "blog-mls-server": "./bin/data_server.js ./blog/server.conf",
+    "calendar-mls-server": "./bin/data_server.js ./calendar/server.conf",
+    "chats-mls-server": "./bin/data_server.js ./chats/server.conf",
+    "comments-mls-server": "./bin/data_server.js ./comments/server.conf",
+    "contacts-mls-server": "./bin/data_server.js ./contacts/server.conf",
+    "demos-mls-server": "./bin/data_server.js ./demos/server.conf",
+    "link-packages-mls-server": "./bin/data_server.js ./link-packages/server.conf",
+    "ownership-mls-server": "./bin/data_server.js ./ownership/server.conf",
+    "streams-mls-server": "./bin/data_server.js ./streams/server.conf",
+    "users-mls-server": "./bin/data_server.js ./users/server.conf"
   },
   "devDependencies": {
     "copious-registry": "^ 0.5.6"

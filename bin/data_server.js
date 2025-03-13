@@ -2,9 +2,6 @@
 
 // data server under ....<app name>
 // viewing data server
-//
-
-
 
 //
 const GeneralDataServer = require('../lib/data_server_class.js')
@@ -23,17 +20,15 @@ let g_conf = {
     'file_shunting' : false
 }
 
-
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
-if ( process.argv[PAR_COM_CONFIG] !== undefined ) {     // g_conf_file  --- location of communication configuration
-    g_conf_file = process.argv[PAR_COM_CONFIG]
-}
-
-if ( g_conf_file !== undefined ) {
-    g_conf = JSON.parse(fs.readFileSync(g_conf_file,'ascii').toString())
-            // if this fails the app crashes. So, the conf has to be true JSON
+if ( process.argv[PAR_COM_CONFIG] !== undefined ) {     // conf_file  --- location of communication configuration
+    let conf_file = process.argv[PAR_COM_CONFIG]
+    if ( conf_file !== undefined ) {
+        g_conf = JSON.parse(fs.readFileSync(conf_file,'ascii').toString())
+                // if this fails the app crashes. So, the conf has to be true JSON
+    }
 } else {
     console.log("Failed to load configuration")
     process.exit(0)
@@ -42,8 +37,9 @@ if ( g_conf_file !== undefined ) {
 
 // ---- ---- ---- ---- CONSTRUCT  ---- ---- ---- ---- ---- ---- ---- ----
 
-
-g_conf.application_searcher = './application_searching.js'
+if ( g_conf.application_searcher === undefined || g_conf.application_searcher === false ) {
+    g_conf.application_searcher = './application_searching.js'
+}
 
 let g_data_server = new GeneralDataServer(g_conf)
 
