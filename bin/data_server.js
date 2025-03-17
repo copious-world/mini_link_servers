@@ -4,7 +4,7 @@
 // viewing data server
 
 //
-const GeneralDataServer = require('../lib/data_server_class.js')
+const GeneralDataServer = require('link-server-class')
 //
 //
 const PRUNE_MINUTES = 30

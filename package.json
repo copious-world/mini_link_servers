@@ -1,6 +1,6 @@
 {
   "name": "mini-link-servers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "bin": {
     "blog-mls-server": "./bin/data_server.js ./blog/server.conf",
     "calendar-mls-server": "./bin/data_server.js ./calendar/server.conf",
@@ -13,16 +13,8 @@
     "streams-mls-server": "./bin/data_server.js ./streams/server.conf",
     "users-mls-server": "./bin/data_server.js ./users/server.conf"
   },
-  "devDependencies": {
-    "copious-registry": "^ 0.5.6"
-  },
   "dependencies": {
-    "@polka/send-type": "^0.5.2",
-    "categorical-handlers": "^0.4.10 ",
-    "copious-registry": "^0.5.7",
-    "copious-little-searcher": "^0.5.8",
-    "middie": "^7.1.0",
-    "month-utils": "^0.8.2",
-    "polka": "^0.5.2"
+    "link-server-class": "^1.0.1",
+    "copious-little-searcher": "0.5.9"
   }
 }
