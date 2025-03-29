@@ -63,8 +63,8 @@ class AppSearching extends Searching {
     }
 
 
-    creat_email_queyr(f_obj)  {
-        return ""
+    creat_email_query(f_obj)  {
+        return this.get_special_key_query(f_obj.mail,"mail")
     }
 
     /**
@@ -93,7 +93,7 @@ class AppSearching extends Searching {
         }
         if ( receiver_match === false ) {
             // create a new query for this match
-            let email_query = this.creat_email_queyr(f_obj)
+            let email_query = this.creat_email_query(f_obj)
             this.get_search(email_query,0,1)  // the user's first email
         }
     }
