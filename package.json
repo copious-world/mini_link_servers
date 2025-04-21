@@ -9,6 +9,7 @@
     "contacts-mls-server": "./bin/data_server.js ./contacts/server.conf",
     "demos-mls-server": "./bin/data_server.js ./demos/server.conf",
     "link-packages-mls-server": "./bin/data_server.js ./link-packages/server.conf",
+    "mail-mls-server": "./bin/data_server.js ./mail/server.conf",
     "ownership-mls-server": "./bin/data_server.js ./ownership/server.conf",
     "streams-mls-server": "./bin/data_server.js ./streams/server.conf",
     "users-mls-server": "./bin/data_server.js ./users/server.conf"
