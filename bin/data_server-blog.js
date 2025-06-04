@@ -6,11 +6,6 @@
 //
 const GeneralDataServer = require('link-server-class')
 //
-
-/*
-    "users-mls-server": "./bin/data_server.js ./users/server.conf"
-
-*/
 //
 const PRUNE_MINUTES = 30
 const TIMEOUT_THRESHHOLD_INTERVAL = (1000*60)*PRUNE_MINUTES
@@ -42,9 +37,7 @@ if ( process.argv[PAR_COM_CONFIG] !== undefined ) {     // conf_file  --- locati
 
 // ---- ---- ---- ---- CONSTRUCT  ---- ---- ---- ---- ---- ---- ---- ----
 
-if ( g_conf.application_searcher === undefined || g_conf.application_searcher === false ) {
-    g_conf.application_searcher = './application_searching.js'
-}
+g_conf.application_searcher = '../blog/application_searching.js'
 
 let g_data_server = new GeneralDataServer(g_conf)
 
