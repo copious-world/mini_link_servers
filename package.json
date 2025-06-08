@@ -1,6 +1,6 @@
 {
   "name": "mini-link-servers",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "bin": {
     "mls-server" : "./bin/data_server.js",
     "blog-mls-server": "./bin/data_server-blog.js",
@@ -16,7 +16,7 @@
     "users-mls-server": "./bin/data_server-users.js"
   },
   "dependencies": {
-    "link-server-class": "^1.0.4",
-    "copious-little-searcher": "^0.6.2"
+    "link-server-class": "^1.0.7",
+    "copious-little-searcher": "^0.6.3"
   }
 }
