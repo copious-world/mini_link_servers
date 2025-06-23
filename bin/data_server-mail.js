@@ -30,9 +30,15 @@ if ( process.argv[PAR_COM_CONFIG] !== undefined ) {     // conf_file  --- locati
                 // if this fails the app crashes. So, the conf has to be true JSON
     }
 } else {
-    console.log("Failed to load configuration")
-    process.exit(0)
+    try {
+        conf_file = "mls-mail.conf"
+        g_conf = JSON.parse(fs.readFileSync(conf_file,'ascii').toString())
+    } catch (e) {
+        console.log("Failed to load configuration")
+        process.exit(0)
+    }
 }
+
 
 
 // ---- ---- ---- ---- CONSTRUCT  ---- ---- ---- ---- ---- ---- ---- ----

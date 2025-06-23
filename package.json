@@ -1,6 +1,6 @@
 {
   "name": "mini-link-servers",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "bin": {
     "mls-server" : "./bin/data_server.js",
     "blog-mls-server": "./bin/data_server-blog.js",
