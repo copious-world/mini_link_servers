@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const fs = require('fs')
+
 // data server under ....<app name>
 // viewing data server
 

@@ -43,7 +43,7 @@ if ( process.argv[PAR_COM_CONFIG] !== undefined ) {     // conf_file  --- locati
 
 // ---- ---- ---- ---- CONSTRUCT  ---- ---- ---- ---- ---- ---- ---- ----
 
-g_conf.application_searcher = '../blog/application_searching.js'
+g_conf.application_searcher = `${__dirname}/../blog/application_searching.js` //'../blog/application_searching.js'
 
 let g_data_server = new GeneralDataServer(g_conf)
 

@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+const fs = require('fs')
+
+
 // data server under ....<app name>
 // viewing data server
 
@@ -42,7 +45,8 @@ if ( process.argv[PAR_COM_CONFIG] !== undefined ) {     // conf_file  --- locati
 
 // ---- ---- ---- ---- CONSTRUCT  ---- ---- ---- ---- ---- ---- ---- ----
 //  ./contacts/server.conf
-g_conf.application_searcher = '../contacts/application_searching.js'
+g_conf.application_searcher = `${__dirname}/../contacts/application_searching.js` //'../contacts/application_searching.js'
+
 
 let g_data_server = new GeneralDataServer(g_conf)
 
