@@ -1,6 +1,6 @@
 {
   "name": "mini-link-servers",
-  "version": "1.0.16",
+  "version": "1.0.18",
   "bin": {
     "mls-server": "./bin/data_server.js",
     "blog-mls-server": "./bin/data_server-blog.js",
@@ -8,8 +8,8 @@
     "chats-mls-server": "./bin/data_server-chats.js",
     "comments-mls-server": "./bin/data_server-comments.js",
     "contacts-mls-server": "./bin/data_server-contacts.js",
-    "demos-mls-server": "./bin/data_serve-demosr.js",
-    "link-packages-mls-server": "./bin/data_server-link-packages.js",
+    "demos-mls-server": "./bin/data_server-demos.js",
+    "link-packages-mls-server": "./bin/data_server-link-package.js",
     "mail-mls-server": "./bin/data_server-mail.js",
     "ownership-mls-server": "./bin/data_server-ownership.js",
     "streams-mls-server": "./bin/data_server-streams.js",
